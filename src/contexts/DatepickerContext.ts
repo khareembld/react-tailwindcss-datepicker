@@ -24,7 +24,7 @@ import {
 interface DatepickerStore {
     arrowContainer: RefObject<HTMLDivElement> | null;
     asSingle?: boolean;
-
+    appendToBody: boolean;
     calendarContainer: RefObject<HTMLDivElement> | null;
     changeDatepickerValue: (value: DateValueType, e?: HTMLInputElement | null | undefined) => void;
     changeDayHover: (day: DateType) => void;
@@ -75,6 +75,7 @@ interface DatepickerStore {
 const DatepickerContext = createContext<DatepickerStore>({
     arrowContainer: null,
     asSingle: false,
+    appendToBody: false,
 
     calendarContainer: null,
     changeDatepickerValue: () => {},

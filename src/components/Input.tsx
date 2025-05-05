@@ -45,7 +45,8 @@ const Input = (e: Props) => {
         inputName,
         classNames,
         popoverDirection,
-        required
+        required,
+        appendToBody
     } = useContext(DatepickerContext);
 
     // UseRefs
@@ -237,23 +238,24 @@ const Input = (e: Props) => {
                 div.classList.remove("hidden");
                 div.classList.add("block");
 
-                // window.innerWidth === 767
-                const popoverOnUp = popoverDirection == "up";
-                const popoverOnDown = popoverDirection === "down";
-                if (
-                    popoverOnUp ||
-                    (window.innerWidth > 767 &&
-                        window.screen.height - 100 < div.getBoundingClientRect().bottom &&
-                        !popoverOnDown)
-                ) {
-                    div.classList.add("bottom-full");
-                    div.classList.add("mb-2.5");
-                    div.classList.remove("mt-2.5");
-                    arrow.classList.add("-bottom-2");
-                    arrow.classList.add("border-r");
-                    arrow.classList.add("border-b");
-                    arrow.classList.remove("border-l");
-                    arrow.classList.remove("border-t");
+                if (!appendToBody) {
+                    const popoverOnUp = popoverDirection == "up";
+                    const popoverOnDown = popoverDirection === "down";
+                    if (
+                        popoverOnUp ||
+                        (window.innerWidth > 767 &&
+                            window.screen.height - 100 < div.getBoundingClientRect().bottom &&
+                            !popoverOnDown)
+                    ) {
+                        div.classList.add("bottom-full");
+                        div.classList.add("mb-2.5");
+                        div.classList.remove("mt-2.5");
+                        arrow.classList.add("-bottom-2");
+                        arrow.classList.add("border-r");
+                        arrow.classList.add("border-b");
+                        arrow.classList.remove("border-l");
+                        arrow.classList.remove("border-t");
+                    }
                 }
 
                 setTimeout(() => {
@@ -274,7 +276,7 @@ const Input = (e: Props) => {
                 input.removeEventListener("focus", showCalendarContainer);
             }
         };
-    }, [calendarContainer, arrowContainer, popoverDirection]);
+    }, [calendarContainer, arrowContainer, popoverDirection, appendToBody]);
 
     return (
         <>
