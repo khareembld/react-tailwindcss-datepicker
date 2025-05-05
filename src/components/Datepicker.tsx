@@ -397,9 +397,9 @@ const Datepicker = (props: DatepickerType) => {
     }, [popupClassName]);
 
     const calculatePosition = useCallback(() => {
-        if (!appendToBody || !input) return {};
+        if (!appendToBody || !inputRef.current) return {};
 
-        const inputRect = input.getBoundingClientRect();
+        const inputRect = inputRef.current.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
@@ -409,7 +409,7 @@ const Datepicker = (props: DatepickerType) => {
             left: inputRect.left + scrollLeft,
             zIndex: 1000
         };
-    }, [appendToBody, input]);
+    }, [appendToBody, inputRef]);
 
     return (
         <DatepickerContext.Provider value={contextValues}>
